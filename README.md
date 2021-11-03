@@ -1,8 +1,8 @@
 # Superliminal Game Object Sizing Illusion Demo
 
-  I will share my experiences while trying to create object sizing feature from superliminal game in Unity. Since I am not an experienced game developer I made a lot of mistakes. The main purpose of writing this article is sharing my mistakes, not to teach you how to make such demo. Besides my solution may not be the best solution (most probably it is not). I learned many things while trying to create a working demo and had fun. Hope you enjoy.
+  I will share my experience that I gained while trying to create object sizing feature from superliminal game in Unity. Since I am not an experienced game developer, I made a lot of mistakes. The main purpose of writing this article is sharing my mistakes, not to teach you how to make such demo. Besides, my solution may not be the best solution (most probably it is not). I learned many things while trying to create a working demo and had fun. Hope you enjoy.
   
-  To clarify what is this demo and what I try to achieve I will make an introduction. Superliminal is a fps puzzle game based on optic illusions. One of these illusions is that when you drag an object with mouse its scale according to your view does not change so it's real scale changes (it becomes larger when you put object further in order to seem unchanged in your perspective). My aim is to create this illusion in Unity.
+  To clarify what is this demo and what I tried to achieve, I will make an introduction. Superliminal is a FPS puzzle game based on optic illusions. One of these illusions is that when you drag an object with mouse its scale according to your view does not change so it's real scale changes (it becomes larger when you put object further in order to seem unchanged in your perspective). My aim is to create this illusion in Unity.
   
 ## How Illusion Works
 
@@ -69,7 +69,7 @@
   }
   ```
   
-  That did not solve the intersection problem at corners because it adds offset value for just one wall. After that I thought that moving the object with `transform.Translate` and leaving collision problems to colliders and rigidbody may solve my problem. I changed my code according to this.
+  That did not solve the intersection problem at corners because it adds offset value for just one wall. After that, I thought that moving the object with `transform.Translate` and leaving collision problems to colliders & rigidbody may solve my problem. I changed my code according to this.
   
   ```cs
   public class DraggableObject : MonoBehaviour
@@ -91,7 +91,7 @@
   }
   ```
   
-  This version solved intersection issues but the object was moving very slow when moveSpeed is low. Raising the value caused another problem. Since translate step value increased the object started vibrating. When translate step value is high it leaps into wall and then moves back because of colliders. After watching some tutorials about movement I decided to try `rigidbody.movePosition` instead of `transform.Translate`.
+  This version solved intersection issues, but the object was moving very slow when moveSpeed is low. Raising the value caused another problem. Since translate step value increased the object started vibrating. When translate step value is high it leaps into wall and then moves back because of colliders. After watching some tutorials about movement I decided to try `rigidbody.movePosition` instead of `transform.Translate`.
   
   ```cs
   public class DraggableObject : MonoBehaviour
@@ -119,7 +119,7 @@
   }
   ```
   
-  This method had same move speed problem too I mentioned above. Therefore I decided to return manipulating `transform.position` in order to get instant reaction. However I had to solve intersection problem with code. I found a way which is casting rays to six directions (up, down, right, left, forward, backward) and check is there a wall, if there is a wall push object according to normal of this wall.
+  This method had same move speed problem too I mentioned above. Therefore I decided to return manipulating `transform.position` in order to get instant reaction. However, I had to solve intersection problem with the code. I found a way which is casting rays to six directions (up, down, right, left, forward, backward) and check is there a wall, if there is a wall push object according to normal of this wall.
   
   ```cs
   public class DraggableObject : MonoBehaviour
@@ -164,7 +164,7 @@
   
 ## Scaling the object
   
-  This idea worked well. It had some laggy movement problems but not all the time so it was okay for me. Next thing to do was scaling the object to create the illusion. Idea behind scaling is simple. Object will be scaled by the distance change between player and object. I also added rigidbody to the object to add gravity.
+  This idea worked well. It had some laggy movement problems but not all the time so it was okay for me. Next thing to do was scaling the object to create the illusion. Idea behind scaling was simple. Object was to be scaled by the distance change between player and object. I also added rigidbody to the object to add gravity.
   
   ```cs
   public class DraggableObject : MonoBehaviour
@@ -238,7 +238,7 @@
   
 ## Rotating the object
   
-  Moving and scaling was working okay. Finally left to rotate the object. I didn't want to make the object child of player to rotate according to player because the object will be affected by players movement also. First idea I tried was caching initial difference between `transform.forward` vectors of the object and camera and add this difference to camera's forward vector to calculate object's new forward vector.
+  Moving and scaling was working okay. Final thing to be done was to rotate the object. I didn't want to make the object child of player to rotate according to player because the object will be affected by players movement also. First idea I tried was caching initial difference between `transform.forward` vectors of the object and camera and add this difference to camera's forward vector to calculate object's new forward vector.
     
   ```cs
   public class DraggableObject : MonoBehaviour
@@ -314,11 +314,11 @@
   }
   ```  
  
-  It did not work as I want but I don't now the reason :/. I realized that I should rotate the object just on y-axis. Thus I tried another way to rotate the object without making it player's child object. I calculated angle difference between the object's forward vector and camera's forward vector on y-axis and add this difference to camera's forward vector to get objects new forward vector. But that did not work also.
+  It did not work as I wanted and I don't know the reason yet :/. I realized that I should rotate the object just on y-axis. Thus, I tried another way to rotate the object without making it player's child object. I calculated angle difference between the object's forward vector and camera's forward vector on y-axis and add this difference to camera's forward vector to get objects new forward vector. But that did not work either.
   
 ## Final version
   
-  Finally I decided to try making the object player's child object but that also did not work as I wanted. Unfortunately I can not explain rotating problem because I did not understand so I deleted rotation part. The final version is below.
+  Finally I decided to try making the object player's child object, but that also did not work as I wanted. Unfortunately, I can not explain rotating problem because I did not understand the source of the problem. Thus, I deleted rotation part. The final version is below.
   
   ```cs
   public class DraggableObject : MonoBehaviour
@@ -390,5 +390,5 @@
   }
   ```
   
-  I am an inexperienced game developer and I tried to make this demo without getting much help to gain some experience. Therefore it may be unefficient, it may has wrong ideas but I hope it helps people trying to learn Unity.
+  I am an inexperienced game developer and I tried to make this demo without getting much help to gain some experience. Therefore, it may be inefficient, it may have wrong ideas, but I hope it helps people trying to learn Unity.
  
