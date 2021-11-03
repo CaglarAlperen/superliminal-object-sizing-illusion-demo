@@ -2,7 +2,7 @@
 
   I will share my experiences while trying to create object sizing feature from superliminal game in Unity. Since I am not an experienced game developer I made a lot of mistakes. The main purpose of writing this article is sharing my mistakes, not to teach you how to make such demo. Besides my solution may not be the best solution (most probably it is not). I learned many things while trying to create a working demo and had fun. Hope you enjoy.
   
-  To clarify what is this demo and what I try to achieve I will make an introduction. Superliminal is a fps puzzle game based on optic illusions. One of these illusions is that when you drag an object with mouse its scale according to your view does not change so it's real scale changes (it becomes larger when you put object further to not change in your perspective). My aim is to create this illusion in Unity.
+  To clarify what is this demo and what I try to achieve I will make an introduction. Superliminal is a fps puzzle game based on optic illusions. One of these illusions is that when you drag an object with mouse its scale according to your view does not change so it's real scale changes (it becomes larger when you put object further in order to seem unchanged in your perspective). My aim is to create this illusion in Unity.
   
 ## How Illusion Works
 
